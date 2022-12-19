@@ -1,0 +1,76 @@
+{
+    "data":[
+        {
+            "id": 1,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        },
+        {
+            "id": 2,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        },
+        {
+            "id": 3,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        },
+        {
+            "id": 4,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        },
+        {
+            "id": 5,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        },
+        {
+            "id": 6,
+            "image": "image1",
+            "productname": "Women Dress",
+            "Shop_Name" : "Anima",
+            "Featured_product": false,
+            "Latest_product" : true,
+            "Most_popular_product": true,
+            "published" : true,
+            "Actions" : 3
+    
+        }
+    ]
+}

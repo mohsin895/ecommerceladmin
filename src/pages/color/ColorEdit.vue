@@ -1,0 +1,113 @@
+<template>
+	<div class="card border-secondary  mb-3" >
+	  <div class="card-header h4">Color Add</div>
+	  <div class="card-body ">
+	    <form @submit.prevent="formSubmitPrevent()">
+	    	<div class="row">
+	    		<div class="col-12" v-if="errMsgFlag">
+	    			<div class="alert alert-danger">{{errMsg}}</div>
+	    		</div>
+	    		<div class="col-12" v-if="msgFlag">
+	    			<div class="alert alert-success">{{msg}}</div>
+	    		</div>
+	    		<div class="col-6">
+					  <div class="form-group mt-2">
+					    <label for="title">Color Name</label>
+					    <input type="text" class="form-control mt-1" v-model="colorName">
+					    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					  </div>
+					  <div class="form-group mt-2">
+					    <label for="title">Choose Color</label>
+					    <input type="color" class="form-control mt-1" v-model="colorCode">
+					    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					  </div>
+	    		</div>
+	    		<div class="col-12 mt-2 d-flex flex-row-reverse">
+	    			
+	    			<button class="btn btn-info m-2 text-light" @click="addColor()">
+	    				<icon name="save" size="20px"/> Add</button>
+	    			<button class="btn btn-warning m-2 text-light" @click="resetColorForm()"><icon name="switch" size="20px"/>Reset</button>
+	    		</div>
+	    	</div>
+		</form>
+	  </div>
+	</div>
+</template>
+<script>
+export default{
+	data(){
+		return {
+			errMsg:null,
+			msg:null,
+			errMsgFlag:false,
+			msgFlag:false,
+			colorName:null,
+			colorCode:null,
+			
+		}
+	},
+	beforeMount(){
+
+	},
+	methods:{
+		
+		formSubmitPrevent(e){
+    		 // e.preventDefault();
+    	},
+    	
+		addColor(){
+			if(this.colorFormValidation()){
+				let token=window.localStorage.getItem("token");
+				 let config = {
+	                   headers: {
+	                      'Content-Type': 'multipart/form-data',
+	                      'Authorization': 'Bearer '+token
+	                  }   
+	              }; 
+				let formData=new FormData();
+				formData.append("colorName",this.colorName);
+				formData.append("colorCode",this.colorCode);
+				this.$http.post("color/add",formData,config)
+				 .then(response=>{
+				 	this.msgFlag=response.data.msgFlag;
+		        	this.msg=response.data.msg;
+		        	this.errMsg=response.data.errMsg;
+		        	this.errMsgFlag=response.data.errMsgFlag;
+				
+					if(this.errMsgFlag==true)
+						this.$toaster.warning(this.errMsg);
+		        	if(this.msgFlag==true){
+		        		this.$toaster.success(this.msg);
+		        		this.resetColorForm();
+		        	}
+				 })
+				 .catch(error=>{console.dir()})
+				 .finally();
+			}
+		},
+		
+		colorFormValidation(){
+			if(this.colorName!=null && this.colorCode!=null){
+				return true;
+			}
+			else{
+				if(this.colorName==null){
+					this.errMsg="Please Write Color Name.";
+					this.$toaster.warning(this.errMsg);
+				}
+				if(this.colorCode==null){
+					this.errMsg="Please Select Color Code.";
+					this.$toaster.warning(this.errMsg);
+				}
+				this.errMsgFlag=true;
+				return false;
+			}
+		},
+		
+		resetColorForm(){
+			this.colorCode=null;
+			this.colorName=null;
+		},
+	}
+}
+</script>
